@@ -1,0 +1,26 @@
+<!-- Cascading Style Sheets (CSS) is used to format webpage layout
+control color, font, size, spacing, background image, different displays for different devices & screen sizes
+cascading - style applied to parent element will also applied to all children element
+CSS can be added to HTML document:
+- Inline: style attribute in HTML element, defines single element
+- Internal: style attribute in head section, defines single HTML page
+- External: link element in head section to link external CSS file, can define for many HTML pages
+head element stores <style> & <link> elements
+style element defines style information
+lnik element defines link between document and external source
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {background-color:powderblue;}
+        h1 {color:red;}
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Internal h1</h1>
+    <p style="background-color:peachpuff">Inline: single element</p>
+    <p>paragraph 2</p>
+</body>
+</html>

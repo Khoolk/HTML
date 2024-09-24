@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+        <style>
+            img {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="path.jpg" alt="alternate text" style="width:30px;height:50px;">
+        <br>
+        <img src="/Images/HTML5.png" alt="HTML5" style="width:50px;height:50px;">
+        <br>
+        <img src="/Images/HTML5.png" alt="displayed image name" width="10" height="10">
+        <br>
+        <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com" style="width:100px;height:120px;">
+        <br>
+        <img src="/Images/minion.gif" alt="minion" style="width:200px;height:100px;">
+        <br>
+        <a href="index.html">
+        <img src="/Images/path.jpg" alt="image link" style="width:80px;height:50px;"></a>
+        <p><img src="/Images/HTML5.png" alt="HTML5" style="float:right;width:30px;height:30px;">
+            image float on right of paragraph</p>
+    </body>
+</html>
+<!-- HTML image is linked to web page
+image element embed image by creating a holding space for the reference image
+    -source attribute specifies path to image (URL), browser get the image from web server when the page loads
+    -alternate text attribute specifies alternate text for the image, when the browser cannot find the image (slow internet, error src, screen reader)
+    -style attribute of image specifies width & height, not overrided
+style attribute in head section will override width & height attribute of image
+src="/folder/jpg" include folder name for image in another folder
+src="https://www.com/image/jpg" full URL for image from another server
+put <img> in <a> to use image as link
+float property let image float on left or right of text
+-->

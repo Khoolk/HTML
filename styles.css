@@ -1,0 +1,23 @@
+/*External style sheet must not contain HTML code
+can change web site style by switching one file
+can be referenced with:
+-full URL: https://www.w3schools.com/html/styles.css
+-html folder on the current web site: /html/styles.css
+-same folder: styles.css
+*/
+h1 {
+    background-color:chartreuse;
+    font-family: fantasy;
+    font-size: 300%;
+}
+p {
+    color:green;
+    font-family:'Lucida Sans';
+    border: 3px solid palevioletred;
+    padding: 30px;
+    margin: 50px;
+}
+/*border property defines border around element
+padding property defines space between text & border
+margin property defines space outside border
+*/

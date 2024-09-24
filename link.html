@@ -1,0 +1,27 @@
+<!-- HTML link is hyperlink, click on to jump to another document
+<a> element defines a hyperlink
+    - href attribute indicates link address
+    - target attribute with value:
+        - _blank: opens in new window or tab
+        - _self: opens in same window or tab
+        - _parent: opens in parent frame
+        - _top: opens in full body of window
+Absolute URL: full web address
+Relative URL: local link (page within same website) without https
+Add <img> in <a> to use image as link
+Use mailto: to create link which opens email
+Button element use JavaScript code such as onclick
+-->
+<!DOCTYPE html>
+<html>
+<body>
+<a href="https://www.w3schools.com/" target="_blank">link text</a>
+<br>
+<a href="https://www.w3schools.com/" target="_blank">
+    <img src="smiley.gif" alt="Image alternate text" style="width:42px;height:42px;"></a>
+<br>
+<a href="mailto:example@email.com">Send email</a>
+<br>
+<button onclick="document.location='index.html'">Button</button>
+</body>
+</html>

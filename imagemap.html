@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <img src="/Images/path.jpg" alt="image map" usemap="#themap">
+        <map name="themap">
+            <area shape="rect" coords="48, 222, 506, 337" href="index.html">
+            <area shape="circle" coords="270, 280, 250" href="heading.html">
+            <area shape="poly" coords="444, 481, 485, 447, 639, 604, 634, 634, 601, 638" href="comment.html">
+        </map>
+    </body>
+</html>
+<!-- HTML image map create clickable area on image
+image element with usemap attribute as image map
+map element create image map, linked to image using name attribute = usemap attribute
+area element create clickable area with shape attribute and coordinates attribute:
+    -rect: rectangular area (top, left, bottom, right)
+    -circle: circular area (center x,y, radius)
+    -poly: polygonal area (multiple coordinate points linked by straight lines)
+    -default: entire area
+-->
