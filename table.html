@@ -1,0 +1,83 @@
+<!-- HTML table arrange data into rows & columns
+<td> table data is the content of table cell
+    -can contain elements: text, image, list, link, other table
+<tr> table row
+<th> table header is the header cell
+padding is space between cell content & cell edge
+spacing is space between cells
+nth-child is every other:
+    -row for tr
+    -column for th, td
+border-bottom property is horizontal divider
+:hover selector display when hover over
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table {
+                border-spacing: 10px;
+            }
+            th, td {
+                border: 1px solid lightgrey;
+                padding-top: 20px;
+                padding-bottom: 10px;
+                border-radius: 10px;
+                border-style: dotted;
+                text-align: left;
+            }
+            tr:nth-child(even), th:nth-child(even), td:nth-child(even) {
+                background-color:rgba(51, 231, 255, 0.3);
+            }
+            tr:hover {
+                border-bottom: 1px solid blue;
+                background-color: blueviolet;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Table 1</h2>
+        <caption>Horizontal header</caption>
+        <table style="border-collapse: collapse; width: 100%">
+            <tr>
+                <th style="width:60%; height:50px">Company</th>
+                <th colspan="2">Contact</th>
+                <th>Country</th>
+            </tr>
+            <tr>
+                <td>AA</td>
+                <td>Ali</td>
+                <td>Osman</td>
+                <td>a</td>
+            </tr>
+            <tr>
+                <td>BB</td>
+                <td>Ben</td>
+                <td>Tan</td>
+                <td>b</td>
+            </tr>
+        </table>
+        <h2>Table 2 -vertical header</h2>
+        <table style="width: 100%">
+            <tr>
+                <th>Company</th>
+                <td>AA</td>
+                <td>BB</td>
+            </tr>
+            <tr>
+                <th rowspan="2">Contact</th>
+                <td>Ali</td>
+                <td>Ben</td>
+            </tr>
+            <tr>
+                <td>Osman</td>
+                <td>Tan</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>a</td>
+                <td>b</td>
+            </tr>
+        </table>
+    </body>
+</html>

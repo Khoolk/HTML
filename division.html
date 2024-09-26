@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .grid-container {
+                display: grid;
+                grid-template-columns: 33% 33% 33%;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Grid</h2>
+        <div class="grid-container">
+            <div style="background-color:red">
+                <p>division element 1</p>
+            </div>
+            <div style="background-color:orange">
+                <p>division element 2</p>
+            </div>
+            <div style="background-color:green">
+                <p>division element 3</p>
+            </div>
+        </div>
+    </body>
+</html>
+<!-- align division element side by side
+- Grid
+    -define more than one row & position each row individually
+- Float
+div.mycontainer {
+  width:100%;
+  overflow:auto;
+}
+div.mycontainer div {
+  width:33%;  
+  float:left;
+}
+- Inline-block
+div {
+  width:30%;  
+  display:inline-block;
+}
+- Flex
+.mycontainer {
+  display: flex;
+}
+.mycontainer > div {
+  width:33%;
+}
+-->

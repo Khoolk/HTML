@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>Different image for different screen size</h2>
+        <picture>
+            <source media="(min-width: 860px)" srcset="/Images/1.png">
+            <source media="(min-width: 600px)" srcset="/Images/2.png">
+            <img src="/Images/3.png" style="width:auto;">
+        </picture>
+    </body>
+</html>
+<!-- HTML picture element gives flexibility in specifiying image resources
+contains multiple source element each refer to different image through scrset attribute
+media attribute defines condition when image is most suitable
+image element as last child element of picture element
+    -use the image when browser do not support picture element 
+    -or none of the source element match
+Bandwidth -small screen or device no need to load large image file
+Format -browser or device may not support all file formats
+browser will use the first source element with matching attribute values
+    -ignoring any following sources elements
+-->
