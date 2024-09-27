@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #id1 {
+                color:deeppink;
+            }
+        </style>
+    </head>
+    <body>
+        <p><a href="#id1">Jump to bookmark</a></p>
+        <button onclick="displayResult()">Change text</button>
+        <h1>1</h1>
+        <h1>2</h1>
+        <h1 id="id1">3</h1>
+        <h1>4</h1>
+        <h1 id="id2">5</h1>
+        <h1>6</h1>
+        <h1>7</h1>
+        <h1>8</h1>
+        <h1>9</h1>
+        <h1>10</h1>
+        <h1>11</h1>
+        <h1>12</h1>
+        <h1>13</h1>
+        <h1>14</h1>
+        <h1>15</h1>
+        <script>
+            function displayResult() {
+                document.getElementById("id2").innerHTML = "Tadaa!";
+            }
+        </script>
+    </body>
+</html>
+<!-- id attribute specifies an unique id for a HTML element
+an id name can only be used by one element within the page
+id name is case sensitive, cannot start with number, must not contain whitespaces
+id can be used as bookmark by adding link:
+    -jumps to specific part of page when clicked
+id can be used by JavaScript to perform task:
+    -change display result
+-->

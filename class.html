@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .class1 {
+                background-color:cornflowerblue;
+            }
+            .class2 {
+                border: 3px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="class1">
+            <h2>Heading A</h2>
+            <p>paragraph A</p>
+        </div>
+        <h2 class="class1 class2">Heading B</h2>
+        <p class="class2">paragraph B</p>
+        <p>paragraph C with <span class="class1">span class</span> within</p>
+        <button onclick="myFunction()">Hide elements</button>
+        <script>
+            function myFunction() {
+                var x =document.getElementsByClassName("class2");
+                for (var i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+            }
+        </script>
+    </body>
+</html>
+<!-- class attribute specifies a class for any HTML element
+class name is case sensitive
+create class in head section using period(.) followed by class name
+separate class names with space for multiple classes
+class name can be used by JavaScript to perform task:
+    -hide element of the class
+-->

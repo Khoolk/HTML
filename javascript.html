@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <button type="button" onclick="document.getElementById('j1').innerHTML = Date()">Get date</button>
+        <p id="j1"></p>
+        <button type="button" onclick="showText()">Show text</button>
+        <p id="j2"></p>
+        <button type="button" onclick="changeStyle()">Change style</button>
+        <p id="j3">Style</p>
+        <p>
+            <button type="button" onclick="imageSrc(0)">1</button>
+            <button type="button" onclick="imageSrc(1)">2</button>
+        </p>
+        <img id="j4" src="/Images/1.png" style="width:100px;height:auto">
+        <script>
+            function showText() {
+                document.getElementById("j2").innerHTML = "Tadaa!";
+            }
+            function changeStyle() {
+                document.getElementById("j3").style.backgroundColor = "red";
+                document.getElementById("j3").style.fontSize = "20px";
+                document.getElementById("j3").style.color = "white";
+            }
+            function imageSrc(x) {
+                var pic;
+                if (x == 0) {
+                    pic = "/Images/1.png"
+                } else {
+                    pic = "/Images/2.png"
+                }
+                document.getElementById('j4').src = pic;
+            }
+        </script>
+        <noscript>Sorry, your browser does nnot support JavaScript!</noscript>
+    </body>
+</html>
+<!-- JavaScript makes HTML more dynamic & interactive
+script element defines a client-side script
+    -contains script statements or src from external script file
+image manipulation, form validation, dynamic changes of content
+.innerHTML change content
+.style change style
+.src change attribute
+noscript element defines alternate content to display if script is not supported by browser
+-->
