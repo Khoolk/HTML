@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Head Element Page</title>
+        <style>
+            body {
+                background-color:cyan
+            }
+        </style>
+        <base href="https://www.w3schools.com/" target="_blank">
+        <link rel="stylesheet" href="mystyle.css">
+        <meta charset="UFT-8">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="description" content="Web Tutorial">
+        <meta name="author" content="Hans">
+        <meta http-equiv="refresh" content="30">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function myFunction() {
+                document.getElementById("j1").innerHTML = "change text by function";
+            }
+        </script>
+    </head>
+    <body>
+        <p id="j1">Text</p>
+        <button type="button" onclick="myFunction()">change text</button>
+        <img src="images/stickman.gif" width="24" height="39" alt="Stickman">
+        <p><a href="tags/tag_base.asp">HTML base tag</a>
+    </body>
+</html>
+<!-- HTML head element is container for:
+<title>   -document title shown in browser tab
+<style>   -style information of page
+<link>    -link external resources such as style sheet
+<meta>    -metadata is not displayed on page
+            -used by browser (display & reload) & search engine (keyword)
+            -character set, page keyword, description, author, reload
+            -viewport setting -visible page area varies with device
+                                -follow screen width (dimension)
+                                -initial zoom level when loaded by browser (scaling)
+<script>  -client-side JavaScripts
+<base>    -base URL and/or target for all relative URLs in page
+-->
