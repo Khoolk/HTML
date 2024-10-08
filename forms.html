@@ -1,0 +1,39 @@
+<!-- HTML form is used to collect user input, then send to a server for processing
+for attribute in label element binds id attribute in input element together
+submit button send form data to form-handler (server file for processing input data)
+form-handler is specified in action attribute of form element
+input field must have a name attribute to be submitted, 
+or else value of input field will not be sent at all
+-->
+<!DOCTYPE html>
+<html>
+    <body>
+        <h3>Text</h3>
+        <form action="/action_page.php">
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="fname" value="John"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <h3>Radio</h3>
+        <p>Choose number:</p>
+        <form action="/action_page.php">
+            <input type="radio" id="1" name="numbers" value="1">
+            <label for="1">1</label><br>
+            <input type="radio" id="2" name="numbers" value="2">
+            <label for="2">2</label><br>
+            <input type="radio" id="3" name="numbers" value="3">
+            <label for="3">3</label><br><br>
+            <input type="submit" valule="Submit">
+        </form>
+        <h3>Checkbox</h3>
+        <form action="/action_page.php">
+            <input type="checkbox" id="fruit1" name="fruit1" value="Kiwi">
+            <label for="fruit1">Kiwi</label><br>
+            <input type="checkbox" id="fruit2" name="fruit2" value="Grape">
+            <label for="fruit2">Grape</label><br>
+            <input type="checkbox" id="fruit3" name="fruit3" value="Apple">
+            <label for="fruit3">Apple</label><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
