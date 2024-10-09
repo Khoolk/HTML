@@ -9,14 +9,14 @@ or else value of input field will not be sent at all
 <html>
     <body>
         <h3>Text</h3>
-        <form action="/action_page.php">
+        <form action="/action_page.php" target="_blank" method="get" autocomplete="on">
             <label for="fname">First name:</label><br>
             <input type="text" id="fname" name="fname" value="John"><br><br>
             <input type="submit" value="Submit">
         </form>
         <h3>Radio</h3>
         <p>Choose number:</p>
-        <form action="/action_page.php">
+        <form action="/action_page.php" target="_top" method="post">
             <input type="radio" id="1" name="numbers" value="1">
             <label for="1">1</label><br>
             <input type="radio" id="2" name="numbers" value="2">
@@ -26,7 +26,7 @@ or else value of input field will not be sent at all
             <input type="submit" valule="Submit">
         </form>
         <h3>Checkbox</h3>
-        <form action="/action_page.php">
+        <form action="/action_page.php" novalidate>
             <input type="checkbox" id="fruit1" name="fruit1" value="Kiwi">
             <label for="fruit1">Kiwi</label><br>
             <input type="checkbox" id="fruit2" name="fruit2" value="Grape">
@@ -37,3 +37,18 @@ or else value of input field will not be sent at all
         </form>
     </body>
 </html>
+<!-- action is set to current page if no action attribute
+target attribute specifies where to display the response received after submit form:
+    _blank      -new window or tab
+    _self       -current window
+    _parent     -parent frame
+    _top        -full body of window
+    framename   -named iframe
+method attribute specifies HTTP method used to submit form data:
+    get     -append to URL variable, can be bookmarked, for non-secure data (query string), 
+            data is visible in URL (avoid sensitive data), 2048 characters limit
+    post    -HTTP post transaction, append inside HTTP request, no size limitation, 
+            cannot be bookmarked
+autocomplete attribute specifies browser to autofill values based on values entered before
+novalidate attribute specifies the input should not be validated when submitted
+-->
