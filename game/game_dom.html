@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Game Page</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #f1f1f1;
+            height: 100vh;
+        }
+
+        #welcomeScreen {
+            display: block;
+        }
+
+        #gameOverScreen {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #gameScreen {
+            position: relative;
+            display: none;
+        }
+
+        canvas {
+            border: 1px solid #d3d3d3;
+            background-color: #f1f1f1;
+            z-index: 1;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #controlButtons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="welcomeScreen">
+        <h1>Welcome to the Game!</h1>
+        <p>Click below to start the game.</p>
+        <button id="startButton">Start Game</button>
+    </div>
+
+    <div id="gameScreen">
+        <div id="canvasContainer"></div>
+        <div id="controlButtons">
+            <button onmousedown="move('up')" onmouseup="clearmove()" ontouchstart="move('up')">UP</button><br><br>
+            <button onmousedown="move('left')" onmouseup="clearmove()" ontouchstart="move('left')">LEFT</button>
+            <button onmousedown="move('right')" onmouseup="clearmove()" ontouchstart="move('right')">RIGHT</button><br><br>
+            <button onmousedown="move('down')" onmouseup="clearmove()" ontouchstart="move('down')">DOWN</button>
+        </div>
+    </div>
+
+    <div id="gameOverScreen" class="overlay">
+        <h1>Game Over</h1>
+        <button id="restartButton">Restart Game</button>
+    </div>
+
+    <script>
+        const welcomeScreen = document.getElementById("welcomeScreen");
+        const gameScreen = document.getElementById("gameScreen");
+        const gameOverScreen = document.getElementById("gameOverScreen");
+        const canvasContainer = document.getElementById("canvasContainer");
+        const startButton = document.getElementById("startButton");
+        const restartButton = document.getElementById("restartButton");
+
+        let myGamePiece;
+        let myBackground;
+        let myObstacles = [];
+        let mySound;
+        let myMusic;
+
+        startButton.addEventListener("click", () => {
+            welcomeScreen.style.display = "none";
+            gameScreen.style.display = "block";
+            startGame();
+        });
+
+        function startGame() {
+            myGamePiece = new component(30, 30, "smiley.gif", 10, 120, "image");
+            myBackground = new component(656, 270, "citymarket.jpg", 0, 0, "background");
+            mySound = new sound("bounce.mp3");
+            myMusic = new sound("gametheme.mp3");
+            myMusic.play();
+            myGameArea.start();
+        }
+
+        const myGameArea = {
+            canvas: document.createElement("canvas"),
+            start: function () {
+                this.canvas.width = 656;
+                this.canvas.height = 270;
+                this.context = this.canvas.getContext("2d");
+                canvasContainer.appendChild(this.canvas);
+                this.frameNo = 0;
+                myBackground.update();
+                myGamePiece.update();
+                this.interval = setInterval(updateGameArea, 20);
+            },
+            stop: function () {
+                clearInterval(this.interval);
+            },
+            clear: function () {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        };
+
+        function component(width, height, color, x, y, type) {
+            this.type = type;
+            this.width = width;
+            this.height = height;
+            this.speedX = 0;
+            this.speedY = 0;
+            this.x = x;
+            this.y = y;
+            if (type == "image" || type == "background") {
+                this.image = new Image();
+                this.image.src = color;
+                this.image.onload = () => {
+                this.loaded = true;
+            };
+            }
+            this.update = function () {
+                const ctx = myGameArea.context;
+                if ((type === "image" || type === "background") && this.loaded) {
+                    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+                    if (type === "background") {
+                        ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
+                    }
+                } else if (type !== "image" && type !== "background") {
+                    ctx.fillStyle = color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            };
+            this.newPos = function () {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x <= -this.width) {
+                    this.x += this.width;
+                }
+            };
+            this.crashWith = function (otherobj) {
+                const myleft = this.x;
+                const myright = this.x + this.width;
+                const mytop = this.y;
+                const mybottom = this.y + this.height;
+                const otherleft = otherobj.x;
+                const otherright = otherobj.x + otherobj.width;
+                const othertop = otherobj.y;
+                const otherbottom = otherobj.y + otherobj.height;
+                return !(
+                    mybottom < othertop ||
+                    mytop > otherbottom ||
+                    myright < otherleft ||
+                    myleft > otherright
+                );
+            };
+        }
+
+        function updateGameArea() {
+            let x, height, gap, minHeight, maxHeight, minGap, maxGap;
+            for (let i = 0; i < myObstacles.length; i++) {
+                if (myGamePiece.crashWith(myObstacles[i])) {
+                    endGame();
+                    myGameArea.stop();
+                    return;
+                }
+            }
+            checkKeys();
+            myGameArea.clear();
+            myBackground.speedX = -1;
+            myBackground.newPos();    
+            myBackground.update();
+            myGameArea.frameNo += 1;
+            if (myGameArea.frameNo === 1 || everyinterval(150)) {
+                x = myGameArea.canvas.width;
+                minHeight = 20;
+                maxHeight = 200;
+                height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
+                minGap = 50;
+                maxGap = 200;
+                gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+                myObstacles.push(new component(10, height, "green", x, 0));
+                myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+            }
+            for (let i = 0; i < myObstacles.length; i++) {
+                myObstacles[i].x -= 1;
+                myObstacles[i].update();
+            }
+            myGamePiece.newPos();
+            myGamePiece.update();
+        }
+
+        function endGame() {
+            mySound.play();
+            myMusic.stop();
+            myGameArea.stop();
+            gameOverScreen.style.display = "flex";
+        }
+
+        restartButton.addEventListener("click", () => {
+
+            myObstacles = [];
+            myGameArea.frameNo = 0;
+
+            gameOverScreen.style.display = "none";
+
+            startGame();
+        });
+
+        function sound(src) {
+            this.sound = document.createElement("audio");
+            this.sound.src = src;
+            this.sound.setAttribute("preload", "auto");
+            this.sound.setAttribute("controls", "none");
+            this.sound.style.display = "none";
+            document.body.appendChild(this.sound);
+            this.play = function () {
+                this.sound.play();
+            };
+            this.stop = function () {
+                this.sound.pause();
+            };
+        }
+
+        function everyinterval(n) {
+            return (myGameArea.frameNo / n) % 1 === 0;
+        }
+
+        function move(dir) {
+            myGamePiece.image.src = "angry.gif";
+            if (dir == "up") {myGamePiece.speedY = -1; }
+            if (dir == "down") {myGamePiece.speedY = 1; }
+            if (dir == "left") {myGamePiece.speedX = -1; }
+            if (dir == "right") {myGamePiece.speedX = 1; }
+        }
+
+        function clearmove() {
+            myGamePiece.image.src = "smiley.gif";
+            myGamePiece.speedX = 0; 
+            myGamePiece.speedY = 0; 
+        }
+
+        let keys = {};
+
+        document.addEventListener("keydown", (event) => {
+            keys[event.key] = true;
+        });
+
+        document.addEventListener("keyup", (event) => {
+            keys[event.key] = false;
+        });
+
+        function checkKeys() {
+            myGamePiece.speedX = 0;
+            myGamePiece.speedY = 0;
+
+            if (keys["ArrowUp"]) {
+                myGamePiece.speedY = -1;
+            }
+            if (keys["ArrowDown"]) {
+                myGamePiece.speedY = 1;
+            }
+            if (keys["ArrowLeft"]) {
+                myGamePiece.speedX = -1;
+            }
+            if (keys["ArrowRight"]) {
+                myGamePiece.speedX = 1;
+            }
+
+            if (Object.values(keys).some(Boolean)) {
+                myGamePiece.image.src = "angry.gif";
+            } else {
+                myGamePiece.image.src = "smiley.gif";
+            }
+        }
+        
+    </script>
+
+</body>
+</html>
